@@ -15,9 +15,9 @@ pipeline {
    stage('Build database') {
      steps {
        dir('database') {
-         sh 'docker build . -t cilist-pipeline-db:$GIT_COMMIT_SHORT'
-         sh 'docker tag cilist-pipeline-db:$GIT_COMMIT_SHORT profesorgreen36/cilist-pipeline-db:$GIT_COMMIT_SHORT'
-         sh 'docker push profesorgreen36/cilist-pipeline-db:$GIT_COMMIT_SHORT'
+         sh 'docker image build -f database/Dockerfile -t cilist-db:$GIT_COMMIT_SHORT .'
+         sh 'docker image tag cilist-db:$GIT_COMMIT_SHORT ravennaras/cilist:db-v3'
+         sh 'docker image push ravennaras/cilist:db-v3'
        }
      }
    }
@@ -25,9 +25,9 @@ pipeline {
    stage('Build backend') {
      steps {
        dir('backend') {
-         sh 'docker build . -t cilist-pipeline-be:$GIT_COMMIT_SHORT'
-         sh 'docker tag cilist-pipeline-be:$GIT_COMMIT_SHORT profesorgreen36/cilist-pipeline-be:$GIT_COMMIT_SHORT'
-         sh 'docker push profesorgreen36/cilist-pipeline-be:$GIT_COMMIT_SHORT'
+         sh 'docker image build -f backend/Dockerfile -t cilist-be:$GIT_COMMIT_SHORT .'
+         sh 'docker image tag cilist-be:$GIT_COMMIT_SHORT ravennaras/cilist:backend-v3'
+         sh 'docker image push ravennaras/cilist:backend-v3'
        }
      }
    }
@@ -35,9 +35,9 @@ pipeline {
    stage('Build frontend') {
      steps {
        dir('frontend') {
-         sh 'docker build . -t cilist-pipeline-fe:$GIT_COMMIT_SHORT'
-         sh 'docker tag cilist-pipeline-fe:$GIT_COMMIT_SHORT profesorgreen36/cilist-pipeline-fe:$GIT_COMMIT_SHORT'
-         sh 'docker push profesorgreen36/cilist-pipeline-fe:$GIT_COMMIT_SHORT'
+         sh 'docker image build -f frontend/Dockerfile -t cilist-fe:$GIT_COMMIT_SHORT .'
+         sh 'docker image tag cilist-fe:$GIT_COMMIT_SHORT ravennaras/cilist:frontend-v3'
+         sh 'docker image push ravennaras/cilist:frontend-v3'
        }
      }
    }
