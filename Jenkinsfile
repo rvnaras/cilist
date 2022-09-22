@@ -15,7 +15,7 @@ pipeline {
    stage('Build database') {
      steps {
        dir('database') {
-         sh 'docker image build -f database/Dockerfile -t cilist-db:$GIT_COMMIT_SHORT .'
+         sh 'docker image build -f database/Dockerfile -t cilist-db:$GIT_COMMIT_SHORT'
          sh 'docker image tag cilist-db:$GIT_COMMIT_SHORT ravennaras/cilist:db-v3'
          sh 'docker image push ravennaras/cilist:db-v3'
        }
