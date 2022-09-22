@@ -44,7 +44,7 @@ pipeline {
 
    stage('Deploy to remote server') {
      steps {
-       sshPublisher(publishers: [sshPublisherDesc(configName: 'Remote Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''docker compose up -d
+       sshPublisher(publishers: [sshPublisherDesc(configName: 'remote server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''docker compose up -d
       
        sleep 40
 
